@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Case</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="css/tabstyle.css">
+   <script>
+   var json1=null;
+   var json=null;
+   var key=null;
+   $(document).ready(function(){
+	   var getUrlParameter = function getUrlParameter(sParam) {
+		    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+		        sURLVariables = sPageURL.split('&'),
+		        sParameterName,
+		        i;
+
+		    for (i = 0; i < sURLVariables.length; i++) {
+		        sParameterName = sURLVariables[i].split('=');
+
+		        if (sParameterName[0] === sParam) {
+		            return sParameterName[1] === undefined ? true : sParameterName[1];
+		        }
+		    }
+		};
+		key=getUrlParameter('key');
+	   json1 = "http://localhost:8080/Recruitment/rest/searchcandidate/searchlist?jobid="+key;
+	   $.getJSON(json1, function(data) {
+           var tr;
+           var trid=0;
+           var tdid=0;
+           
+           $.each(data, function(key, val) { 
+           	
+           	var tr=$('<tr id=\"tr'+trid+'\"></tr>');
+           	tdid=0;
+               $.each(val, function(k, v){
+            	   if(tdid==0)
+           			{
+                     $('<td><a href=\"/Recruitment/rest/addlocal/local?data='+v+'\" onclick=\"setTimeout(function () { window.location.reload(); }, 100)\">'+v+'</a></td>').appendTo(tr);
+           			}
+            	   else
+           			{
+           		 		$('<td>'+v+'</td>').appendTo(tr);
+           			}
+            	   tdid++;
+               });
+        	tr.appendTo("#globaltable");
+           	trid++;
+           })
+       });
+	   json = "http://localhost:8080/Recruitment/rest/locallist/local?jobid="+key;
+	   $.getJSON(json, function(data) {
+           var tr;
+           var trid=0;
+           var tdid=0;
+           
+           $.each(data, function(key, val) { 
+           	
+           	var tr=$('<tr id=\"tr'+trid+'\"></tr>');
+           	tdid=0;
+               $.each(val, function(k, v){
+               $('<td>'+v+'</td>').appendTo(tr);
+               });
+           
+           	tr.appendTo("#localtable");
+        	
+           	trid++;
+           })
+       });
+   });
+   
+   </script>
+
+</head>
+<body>
+ <nav class="navbar navbar-default navbar-inverse" role="navigation">
+ <div class="container-fluid">
+ <div class="navbar-header"> 
+ <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+ <span class="sr-only">Toggle navigation</span> 
+ <span class="icon-bar"></span> <span class="icon-bar"></span>
+ <span class="icon-bar"></span>
+ </button> 
+<h3 style="color:white">#App Name</h3>
+ </div> 
+
+ <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+ <ul class="nav navbar-nav"> </ul>
+ 
+ </div>
+ 
+ <!-- /.navbar-collapse --> </div><!-- /.container-fluid --> </nav>
+
+<div class="container">
+ 
+    <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Local Search</a></li>
+    <li><a data-toggle="tab" href="#menu1">Global Search</a></li>
+
+  </ul>
+   <div class="tab-content">
+
+
+    <div id="home" class="tab-pane fade in active">
+         <div class="table-responsive">
+
+<table  class="table-fill table table-bordered table-hover table-striped">
+<thead>
+<tr>
+<th class="text-left">First Name</th>
+<th class="text-left">Last Name</th>
+<th class="text-left">Gender</th>
+<th class="text-left">Miles</th>
+<th class="text-left">Email</th>
+<th class="text-left">Address</th>
+<th class="text-left">Phone Number</th>
+<th class="text-left">Experience</th>
+<th class="text-left">Degree</th>
+<th class="text-left">Subject</th>
+<th class="text-left">University</th>
+<th class="text-left">Skill1</th>
+<th class="text-left">Skill2</th>
+<th class="text-left">Skill3</th>
+<th class="text-left">Driving Licence</th>
+<th class="text-left">Car Owner</th>
+</tr>
+</thead>
+<tbody class="table-hover" id="localtable">
+
+</tbody>
+</table>
+              </div>          
+                        </div>
+    
+    <div id="menu1" class="tab-pane fade">
+          <div class="table-responsive">
+
+<table class="table-fill table table-bordered table-hover table-striped">
+<thead>
+<tr>
+<th class="text-left">First Name</th>
+<th class="text-left">Last Name</th>
+<th class="text-left">Gender</th>
+<th class="text-left">Miles</th>
+<th class="text-left">Email</th>
+<th class="text-left">Address</th>
+<th class="text-left">Phone Number</th>
+<th class="text-left">Experience</th>
+<th class="text-left">Degree</th>
+<th class="text-left">Subject</th>
+<th class="text-left">University</th>
+<th class="text-left">Skill1</th>
+<th class="text-left">Skill2</th>
+<th class="text-left">Skill3</th>
+<th class="text-left">Driving Licence</th>
+<th class="text-left">Car Owner</th>
+</tr>
+</thead>
+<tbody class="table-hover" id="globaltable">
+
+</tbody>
+</table>
+                        
+                        </div>
+    </div>
+    </div>
+    
+
+</body>
+</html>

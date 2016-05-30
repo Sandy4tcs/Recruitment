@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Login</title>
+
+   
+    
+	 <link rel="stylesheet" href="css/navbar.css">
+	  <link rel="stylesheet" href="css/loginstyle.css">
+	 
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        window.alert = function(){};
+        var defaultCSS = document.getElementById('bootstrap-css');
+        function changeCSS(css){
+            if(css) $('head > link').filter(':first').replaceWith('<link rel="stylesheet" href="'+ css +'" type="text/css" />'); 
+            else $('head > link').filter(':first').replaceWith(defaultCSS); 
+        }
+        $( document ).ready(function() {
+          var iframe_height = parseInt($('html').height()); 
+          window.parent.postMessage( iframe_height, 'http://bootsnipp.com');
+        });
+    </script>
+	
+</head>
+<body  style="background-image:jobportal.png;"> <nav class="navbar navbar-default navbar-inverse" role="navigation">
+ <div class="container-fluid">
+ <div class="navbar-header"> 
+ <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+ <span class="sr-only">Toggle navigation</span> 
+ <span class="icon-bar"></span> <span class="icon-bar"></span>
+ <span class="icon-bar"></span>
+ </button> 
+<h3 style="color:white">#App Name</h3>
+ </div> 
+
+ <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+ <ul class="nav navbar-nav"> </ul>
+ 
+ <ul class="nav navbar-nav navbar-right">
+ 
+ <li> 
+ <a href="#"data-toggle="modal" data-target="#loginbox"><b>Login</b></a>
+ 
+ </li> 
+ </ul> </div>
+ 
+ <!-- /.navbar-collapse --> </div><!-- /.container-fluid --> </nav> 
+
+<!--  <div class="container"> 
+ <div>
+ <h1 id="name">  </h1>
+ </div>  
+         <div id="loginbox" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                      
+            <div class="panel panel-default" >
+                    <div class="panel-heading">
+                        <div class="panel-title">Sign in</div>
+                        <div id="forgetpassword"><a href="#">Forgot password?</a></div>
+                    </div>   
+
+                                 <div class="form-group">
+                                    <div class="col-md-12 control">
+                                        <div id="signin" >
+                                            Sign In or 
+                                        <a href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()">
+                                           Create an account
+                                        </a>
+										to get started
+                                        </div>
+                                    </div>
+                                </div>  					
+
+                    <div style="padding-top:60px" class="panel-body" >
+
+                        <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+                            
+                        <form class="form" role="form" method="post" action="index.html" accept-charset="UTF-8" id="login-nav">
+ <div class="form-group"> 
+ <input type="email" class="form-control"  id="exampleInputEmail2" placeholder="Email address" required> </div> 
+ <div class="form-group"> 
+ 
+ <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+ 
+ </div> 
+ 
+
+                                <div style="margin-top:10px" >
+                                   
+
+                                    <div class="col-sm-12 controls">
+									<button type="submit" class="btn btn-primary ">Sign in</button> 
+                                      
+
+                                    </div>
+                                </div>
+
+
+                                  
+                            </form>     
+
+
+
+                        </div>                     
+                    </div>  
+        </div>
+		
+		   <div id="signupbox" style="display:none; margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="panel-title">Sign Up</div>
+                            <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In</a></div>
+                        </div>  
+                        <div class="panel-body" >
+                            <form id="signupform" class="form-horizontal" role="form">
+                                
+                                <div id="signupalert" style="display:none" class="alert alert-danger">
+                                    <p>Error:</p>
+                                    <span></span>
+                                </div>
+                                    
+                                
+                                  
+                                <div class="form-group">
+                                    <label for="email" class="col-md-3 control-label">Email</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" name="email" placeholder="Email Address">
+                                    </div>
+                                </div>
+                                    
+                                <div class="form-group">
+                                    <label for="firstname" class="col-md-3 control-label">First Name</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" name="firstname" placeholder="First Name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastname" class="col-md-3 control-label">Last Name</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" name="lastname" placeholder="Last Name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="col-md-3 control-label">Password</label>
+                                    <div class="col-md-9">
+                                        <input type="password" class="form-control" name="passwd" placeholder="Password">
+                                    </div>
+                                </div>
+                                    
+                                <div class="form-group">
+                                    <label for="icode" class="col-md-3 control-label">Invitation Code</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" name="icode" placeholder="">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                                                         
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Sign Up</button> 
+                                    </div>
+                                </div>
+                                                                
+                            </form>
+                         </div>
+                    </div>
+
+               
+               
+                
+         </div> 
+		</div>--->
+	
+		
+		<div class="container">
+  <!-- Modal -->
+  <div class="modal fade" id="loginbox" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+<div class="panel panel-default" >
+            <div class="panel-heading">
+                        <div class="panel-title">Sign in</div>
+                        <div id="forgetpassword"><a href="#">Forgot password?</a></div>
+ <div class="form-group">
+                                    <div class="col-md-12 control">
+                                        <div id="signin" >
+                                            Sign In or 
+                                        <a href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()">
+                                           Create an account
+                                        </a>
+          to get started
+                                        </div>
+                                    </div>
+                                </div> 
+                    </div>  
+        </div>
+        <div class="modal-body">
+            <div style="padding-top:30px" class="panel-body">
+
+                        <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+                            
+                        <form class="form" role="form" method="post" action="rest/web/login" accept-charset="UTF-8" id="login-nav">
+ <div class="form-group"> 
+ <input type="text" class="form-control"  id="username" placeholder="UserName" name="username" required> </div> 
+ <div class="form-group"> 
+ 
+ <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
+ 
+ </div> 
+ 
+
+                                <div style="margin-top:10px" >
+                                    <!-- Button -->
+
+                                    <div class="col-sm-12 controls">
+         <input type="submit" class="btn btn-primary" name="submit"/>
+                                      
+
+                                    </div>
+                                </div>
+                                </form>     
+
+
+
+                        </div>
+        </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+ 
+ 
+ 
+ 
+ </body>
+</html>

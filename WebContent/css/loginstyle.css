@@ -1,0 +1,30 @@
+#loginbox{
+	margin-top:50px;
+	margin-bottom:50px;
+	display:none;
+	
+
+}
+
+#forgetpassword{
+	float:right;
+	font-size: 80%;
+	position: relative;
+	top:-10px
+}
+#signin{
+	padding-top:30px;
+	font-size:85%
+}
+#header{
+	background-color:black;
+	color:white;
+}
+.bg-4{
+	background-color:#2f2f2f;
+	color:white;
+}
+
+.img-circle{
+	float:left;
+}
