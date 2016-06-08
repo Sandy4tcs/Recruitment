@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin - Bootstrap Admin Template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+ 
+    <link href="css/sb-admin.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+
+  
+   
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+     <script type='text/javascript'
+src='http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js'></script>
+
+ 	<script>
+ 	/* var MyRows = $("#tblJobData").find('tbody').find('tr');
+ 	for (var i = 0; i < MyRows.length; i++) {
+ 	var MyId = $(MyRows[i]).find('td:eq(0)').html();
+ 	} */
+ 	
+ 	
+ 	
+ 	$(document).ready(function(){
+ 			$.getJSON("http://localhost:8080/Recruitment/rest/JobList/list", function(data) {
+                var tr;
+                var trid=0;
+                var tdid=0;
+                
+                $.each(data, function(key, val) { 
+                	
+                	var tr=$('<tr id=\"tr'+trid+'\"></tr>');
+                	tdid=0;
+                    $.each(val, function(k, v){
+                    	if(tdid==0)
+                    		{
+                    			$('<td><a href=\"/Recruitment/ListDetails.html?key='+v+'\">'+v+'</a></td>').appendTo(tr);
+                    		}
+                    	else
+                    		{
+                    		 $('<td>'+v+'</td>').appendTo(tr);
+                    		}
+                       
+                        tdid++;
+                    });
+                	tr.appendTo("#datatable");
+                	trid++;
+                })
+            });
+ 			
+ 	});
+ 	
+ 	function keysearch()
+		{
+			var key=$("#textsearch").val().toUpperCase();
+			
+			window.location.href = "/Recruitment/MatchDetails.html?key="+key;
+		}
+ 	</script>
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+       <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>  
+        <span class="icon-bar"></span>                        
+      </button>
+      <h3 class="nav-heading" >#App Name</h3>
+    </div>
+    
+  </div>
+</nav>
+			</div>
+			
+          
+        
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                         
+                        </h1>
+						
+									<div id="tfheader" style="float:right;padding-bottom:20px;">
+		
+		        <input type="text" id="textsearch" class="tftextinput" name="q"  size="30"><button value="search" class="btn btn-primary btn-sm" onclick="keysearch()">Search</button>
+			
+		
+	
+	</div>
+                       
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                
+                <!-- /.row -->
+
+              
+                <!-- /.row -->
+
+                <div class="row">
+				<div class="col-lg-3">
+                       <div style="background-color:#f0f5f5;">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"  style="color: #002b80;"><i class="fa fa-money fa-fw"></i> 
+                                           Alerts
+                                        </h3>
+										<div class="panel-body">
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item">
+                                        <span class="badge">just now</span>
+                                        <i class="fa fa-fw fa-calendar"></i>Job profile created for HR Post
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <span class="badge">4 minutes ago</span>
+                                        <i class="fa fa-fw fa-comment"></i> 23 new job profiles are opened
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <span class="badge">23 minutes ago</span>
+                                        <i class="fa fa-fw fa-truck"></i> #00145 job closed
+                                    </a>
+									</div>
+									</div>
+                            
+							</div>
+							     <div class="panel-heading">
+                                <h3 class="panel-title" style="color: #002b80;"><i class="fa fa-money fa-fw"></i> 
+                                         Daily Updates
+                                        </h3>
+										<div class="panel-body">
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item">
+                                       
+                                        <span class="badge">2 minutes ago</span>
+                                        <i class="fa fa-fw fa-comment"></i> 2 job profiles found for #001c48
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <span class="badge">4 minutes ago</span>
+                                        <i class="fa fa-fw fa-comment"></i> #00143 Job Profile doesnot found any suitable match
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <span class="badge">23 minutes ago</span>
+                                        <i class="fa fa-fw fa-truck"></i> #00145 job closed
+                                    </a>
+									</div>
+									</div>
+                            
+							</div>
+							</div>
+							</div>
+                 
+                    <div class="col-lg-6">
+					<div class="panel panel-primary">
+			<div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> DWP Job Openings</h3>
+                            </div>
+
+        
+                                    					
+
+<div class="panel-body">
+      <div class="table-responsive ScrollStyle">
+
+<table id="tblJobData" class="table-fill table table-bordered table-hover table-striped ">
+<thead>
+<tr>
+<th class="text-left" >JobID</th>
+<th class="text-left">JobTitle</th>
+<th class="text-left">JobTime</th>
+<th class="text-left">Location</th>
+<th class="text-left">Salary</th>
+<th class="text-left">Miles</th>
+<th class="text-left">JobType</th>
+<th class="text-left">Experience</th>
+<th class="text-left">Degree</th>
+<th class="text-left">Subject</th>
+<th class="text-left">Institution</th>
+<th class="text-left">DrivingLicence</th>
+<th class="text-left">CarOwner</th>
+
+</tr>
+</thead>
+<tbody class="table-hover" id="datatable" >
+
+</tbody>
+</table>
+                        
+                        </div>
+                        
+						</div>
+						</div>
+			
+						</div>
+						
+                    
+                    <div class="col-lg-3">
+                               <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Create New Job Profiles</h3>
+                            </div>
+   
+                                <form action='rest/submitdata/submit' method='post'  onsubmit="setTimeout(function () { window.location.reload(); }, 100)">
+								<div class="panel-body">
+                                    <input type='text' placeholder='Job Title' class="list-group-item" name="jobtitle" id="jobtitle"/>
+                                     
+                                    <input type='text' placeholder='Location' class="list-group-item" name="location" id="location"/>
+                                     <select class="list-group-item" name="miles" id="miles"> 
+                                     <option selected disabled>Select Miles</option>
+                                     <option value="3">3 Miles</option>
+                                     <option value="5">5 Miles</option>
+                                     <option value="10">10 Miles</option>
+                                     <option value="20">20 Miles</option>
+                                     <option value="30">30 Miles</option>
+                                     <option value="50">50 Miles</option>
+                                     
+                                     </select>
+                                       <input type='text' placeholder='Salary' class="list-group-item" name="salary" id="salary"/>
+                                    
+                                    <select class="list-group-item" name="jobtype" id="jobtype"> 
+                                    <option selected disabled>Select JobType</option>
+                                     <option value="Permanent">Permanent</option>
+                                     <option value="Temporary">Temporary</option>
+                                     <option value="Contract">Contract</option>
+                                     </select>
+                                     
+                                     <select class="list-group-item" name="jobtime" id="jobtime">
+                                     <option selected disabled>Select JobTime</option>
+                                     <option value="Full Time">Full Time</option>
+                                     <option value="Part Time">Part Time</option>
+                                     </select>
+                                       <select class="list-group-item" name="degree" id="degree"> 
+                                       <option selected disabled>Select Degree</option>
+                                     <option value="B-Tech"> University degree</option>
+                                     <option value="master degree"> Master degree</option>
+                                     <option value="P.hd">P.hd</option>
+                                     <option value="A Level">A Level</option>
+                                     <option value="Gcse">Gcse</option>
+                                    <option value="Other">Other</option>
+                                     
+                                     </select>
+                                       <input type='text' placeholder='Degree subject' class="list-group-item" name="degreeSubject" id="degreeSubject"/>
+                                         <input type='text' placeholder='Institution' class="list-group-item" name="institution" id="institution"/>
+                                        
+                                    <input type='text' placeholder='Job Experience' class="list-group-item" name="jobexp" id="jobexp"/>
+                                    <div class="list-group-item">Driving Licence
+                                     <label class="radio-inline">
+                                      <input type="radio"  id="licence" name="licence" value="yes" checked> yes<br>
+                                      </label>
+                                      <label class="radio-inline">
+                                     <input type="radio" id="licence" name="licence" value="no"> No<br>
+                                     </label>
+                                     </div>
+                                     <div class="list-group-item">Car Owner
+                                     <label class="radio-inline">
+                                      <input type="radio" id="carowner" name="carowner" value="yes" checked> yes<br>
+                                      </label>
+                                      <label class="radio-inline">
+                                     <input type="radio" id="carowner" name="carowner" value="no"> No<br>
+                                     </label>
+                                     </div>
+                                    <input type="submit" name="submit" id="submit"/>
+                                </div>
+								
+                                </form>
+                         </div>
+                        
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="js/plugins/morris/raphael.min.js"></script>
+    <script src="js/plugins/morris/morris.min.js"></script>
+    <script src="js/plugins/morris/morris-data.js"></script>
+
+</body>
+
+</html>
