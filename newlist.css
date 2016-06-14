@@ -1,0 +1,32 @@
+.metadata{
+padding-top:1px;
+padding-left:10px
+}
+
+
+.image{
+ position: absolute;
+    top: 20px;
+    right: 40px;
+	}
+	#details
+	{
+	position:relative;}
+	div{
+	padding-bottom:4px;}
+	
+	
+	.well {
+    background: #EEF7FF;
+}
+ul li{
+padding-bottom:4px;
+font-family: "Times New Roman", Times, serif;
+font-weight: bold;
+}
+
+
+
+   
+
+   
