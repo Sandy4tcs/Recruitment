@@ -11,19 +11,36 @@ padding-left:10px
 	}
 	#details
 	{
-	position:relative;}
+	position:relative;
+	   padding: 15px 0;
+    border-top: 1px solid #eaeaea;
+    border-bottom: 1px solid #eaeaea;
+	
+	}
 	div{
 	padding-bottom:4px;}
 	
 	
-	.well {
-    background: #EEF7FF;
-}
+	
 ul li{
 padding-bottom:4px;
 font-family: "Times New Roman", Times, serif;
 font-weight: bold;
 }
+.title a{
+color:#0079d6;
+font-family: "Times New Roman", Times, serif;
+padding-left:4px;
+}
+a:hover {
+   color:blue;
+}
+
+
+
+
+
+
 
 
 
