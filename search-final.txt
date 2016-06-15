@@ -1,0 +1,484 @@
+	$(document).ready(function() {
+
+	    var suggestionUrl = "/bin/sas/searchSuggestions";
+	    var resultsUrl = "/bin/sas/searchResults";
+
+		var searchOverlay = $("#searchOverlayParent");
+
+		var batchSize = 0;
+		
+		var objResultsLoadImg = searchOverlay.find('.resultsList .loaderImg');
+	    var xResults = 0; 
+	    var yResults = xResults + batchSize; 
+
+		var objSuggestionsLoadImg = searchOverlay.find('.suggestionsList .loaderImg');
+	    var xSuggestions = 0; 
+	    var ySuggestions = xSuggestions + batchSize; 
+
+	    function searchInit() {
+	        // Common search overlay initializations
+	        searchOverlay.find('.overlaySearchContainer').off("scroll");
+	        searchOverlay.find('.overlaySearchContainer').on("scroll");
+
+			suggestionsInit();			
+			resultsInit();			
+			faqInit();	        
+	    }
+
+		function faqInit() {
+			searchOverlay.find(".faqContainer > .faqPlaceHolder").trigger("initialize");			
+		}
+
+		function resultsInit() {
+			// Hide the results area and remove all search results
+	        searchOverlay.find(".resultsItem").remove();
+	        searchOverlay.find(".resultsHolder").hide();
+
+			objResultsLoadImg.find("img").hide();
+			objResultsLoadImg.find("span").hide();
+		}
+
+		function suggestionsInit() {
+			// Hide the suggestions area and empty the suggestions list
+			searchOverlay.find('.suggestionsHolder .suggestionTitle').addClass('hide-element');
+			searchOverlay.find(".suggestionsItem").remove();
+			searchOverlay.find(".suggestionsHolder").hide();
+
+			objSuggestionsLoadImg.find("img").hide();
+			objSuggestionsLoadImg.find("span").hide();			
+		}
+
+	    function showOverlaySearch() {
+	        // Initialize a few things
+			var searchOverlayHeight=searchOverlay.height();
+			batchSize=(searchOverlayHeight-134)/110;
+			batchSize=Math.ceil(batchSize);
+			searchOverlay.css("margin-top", $(window).scrollTop());
+	        searchOverlay.find("#searchText").val("");
+	        searchInit();
+
+	        searchOverlay.show();
+	        searchOverlay.find("#searchText").focus();
+	        $("body").toggleClass("modal-open");
+	    }
+
+
+	    ////// Showing search suggestions 
+
+	    function keyUpHandler(event) {
+
+	        searchInit();
+
+	        // Capture keycode 
+	        var keycode = (event.keyCode ? event.keyCode : event.which);
+	        if (keycode == '13') {
+	            showResults();
+	        } else {
+	            searchOverlay.find(".suggestionsHolder").show();
+                searchOverlay.find('.suggestionsHolder .suggestionTitle').removeClass('hide-element');
+                objSuggestionsLoadImg.show();
+                objSuggestionsLoadImg.find("img").show();
+	            var term = $("#searchText").val();
+                var country = getCountryCode();
+        		var language = getLanguageCode();
+
+	            if (term == "") {
+	                suggestionsInit();
+	            } else {
+	                $.ajax({
+	                    type: "GET",
+	                      data: //term, // uncomment when sending the value from the text field as the request
+                       {
+                            "countryCode": country,
+                            "languageCode": language,
+                            "fulltext": term
+            			},
+	                    url: suggestionUrl,
+	                    contentType: "application/json",
+	                    success: suggestionsHandler
+	                });
+
+	            }
+
+	        }
+	    }
+
+	    function suggestionsHandler(data) {
+	        var tempData = data;
+	        var json = tempData.suggestions;
+			xSuggestions = 0;
+	        ySuggestions = xSuggestions + batchSize;
+	        populateSuggestions(json);
+	    }
+
+	    // this function ought to be called for infinite scroll as well
+	    function populateSuggestions(json) {
+
+            //objSuggestionsLoadImg.hide();
+	        // Get a handle to the suggestions place holder
+	        var objUl = searchOverlay.find('.suggestionsList');
+
+	        searchOverlay.find(".suggestionsHolder .suggestionTitle").removeClass('hide-element');
+
+             /*if(batchSize >= json.length){
+				objSuggestionsLoadImg.hide();
+            }*/
+
+            objSuggestionsLoadImg.find('img').hide();
+console.log("inside populateSuggestions"+ json.length);
+			if(json.length == 0){
+				//To show no items available for search
+
+            }else if (ySuggestions >= json.length + batchSize) {
+
+	            //objSuggestionsLoadImg.find('img').hide();
+				objSuggestionsLoadImg.find('span').show();
+
+                 $(".overlaySearchContainer").unbind(); 
+
+	        } else {
+				//objSuggestionsLoadImg.find('img').hide();
+				//objSuggestionsLoadImg.find('span').hide();
+
+	            // Iterate over the JSON to prepare the suggestion items
+
+	            $.each(json.slice(xSuggestions, ySuggestions), function(key, val) {
+	                var objLi = $('<li class="suggestionsItem"></li>');
+	                var objAnchor = $('<a></a>');
+
+	                //objAnchor.text(val.excerpt);			
+					objAnchor.html(val.excerpt);
+	                objAnchor.attr("href", val.link);
+	                //objAnchor.attr("target", "_blank");	
+
+	                objLi.append(objAnchor);
+	                objUl.find(".loaderImg").before(objLi);
+	            });
+
+	            xSuggestions = xSuggestions + batchSize;
+	            ySuggestions = ySuggestions + batchSize;
+
+	            //highlightSearch();		// Arnab: Need to check how this works with AEM
+
+
+                if(json.length > batchSize){
+	            	scrollSuggestionView(json);
+                }
+
+	        }
+	    }
+
+	    //on scroll down to show the load image 
+	    function scrollSuggestionView(json) {
+	        //$('.overlaySearchContainer').off("scroll");
+	       /* $('.overlaySearchContainer').on("scroll", function() {
+                console.log("calling scrollSuggestionView");
+	            if ($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+                    objSuggestionsLoadImg.find('img').show();
+                    objSuggestionsLoadImg.find('span').hide();
+	                window.setTimeout(function() {
+						populateSuggestions(json);
+					}, 1000);
+
+	            }
+	        });*/
+
+            $(".overlaySearchContainer").bind({'mousewheel DOMMouseScroll onmousewheel touchmove scroll': 
+                function(e) {
+
+                //Determine Direction
+                    if (e.originalEvent.wheelDelta && e.originalEvent.wheelDelta >= 0) {
+                    //Up
+                        //console.log("up");
+
+                    } else if (e.originalEvent.detail && e.originalEvent.detail <= 0) {
+                    //Up
+                        //console.log("up");
+
+                    } else {
+                    //Down
+                        console.log("down");
+                        if ($(this).scrollTop() + $(this).innerHeight() >= ($(this)[0].scrollHeight-1)) {
+                            objSuggestionsLoadImg.find('img').show();
+                            objSuggestionsLoadImg.find('span').hide();
+                            window.setTimeout(function() {
+                                populateSuggestions(json);
+                            }, 1000);
+
+	            		}
+                    }
+                 }
+            });
+	    }
+
+	    ////// End of Showing search suggestions 
+
+
+
+	    ////// Showing search results 
+
+	    function showResults() {
+	        searchInit();
+
+	        var term = $("#searchText").val();
+            var country = getCountryCode();
+        	var language = getLanguageCode();
+	        if (term != "") {
+	            // Show the search area
+	            searchOverlay.find(".resultsHolder").show();
+                objResultsLoadImg.show();
+                objResultsLoadImg.find("img").show();
+
+	            // Call CMS search
+	            $.ajax({
+	                type: "GET",
+	                  data: //term, // uncomment when sending the value from the text field as the request
+                     {
+                            "countryCode": country,
+                            "languageCode": language,
+                            "fulltext": term
+            		  },
+	                url: resultsUrl,
+	                contentType: "application/json",
+	                success: resultsHandler
+	            });
+
+	            // Call FAQ 
+	            // Trigger event on the faqPlaceHolder passing the term as parameter
+				console.log("Term before invoking FAQ : " + term);
+	            searchOverlay.find(".faqContainer > .faqPlaceHolder").trigger("search", [term]);
+
+	        }
+	    }
+		
+		function tagSearch(e) {
+			// Get the tag item
+			var tagItem = $(this);
+			
+			// Initialize the search area again
+			//searchInit();
+			//searchOverlay.find(".resultsHolder").show();
+
+			// Change search text
+			$("#searchText").val(tagItem.text());
+			console.log("tag id : " + tagItem.attr("data-tag-id"));
+			
+			// Trigger the search mechanism
+			// Call CMS search
+			/*$.ajax({
+				type: "GET",
+				//  data: tagItem.attr("data-tag-id"), // Here AEM needs to check if the search should be on tag ID or tag title
+				url: resultsUrl,
+				contentType: "application/json",
+				success: resultsHandler
+			});
+
+			// Call FAQ 
+			// Trigger event on the faqPlaceHolder passing the tagItem.text() as parameter
+			searchOverlay.find(".faqContainer > .faqPlaceHolder").trigger("search", [tagItem.text()]);
+			*/
+
+            showResults();
+
+		} 
+		
+
+	    function resultsHandler(data) {
+	        var tempData = data;
+	        var json = tempData.hits;
+	        xResults = 0;
+	        yResults = xResults + batchSize;
+	        populateResults(json);
+	    }
+
+	    // this function ought to be called for infinite scroll as well
+	    function populateResults(json) {
+
+            //objResultsLoadImg.hide();
+
+	        var objUlDummy = $('<ul></ul>');
+console.log("inside populateResults"+ json.length);
+            /*if(batchSize >= json.length){
+				objResultsLoadImg.hide();
+            }*/
+            objResultsLoadImg.find('img').hide();
+            if(json.length == 0){
+				//To show no items available for search
+
+            }else if (yResults >= json.length + batchSize) {
+				//objResultsLoadImg.find('img').hide();
+				objResultsLoadImg.find('span').show();
+				$(".overlaySearchContainer").unbind(); 
+
+	        } else {
+				//objResultsLoadImg.find('img').show();
+				//objResultsLoadImg.find('span').hide();
+				
+	            // Iterate over the JSON to prepare the result items
+
+	            $.each(json.slice(xResults, yResults), function(key, val) {
+	                var objLi = $('<li class="resultsItem"></li>');
+	                var objDiv = $('<div class="searchInfoHead"></div>');
+	                var objAnchor = $('<a class="searchInfoTitle"></a>');
+	                var objPara = $('<div class="searchResult"></div>');	
+	                var objDivtags = $('<div class="tagLink"><span class="tags">Tags</span></div>');
+	                
+					objDiv.text(val.category);
+	                objAnchor.text(val.title);
+	                objAnchor.attr("href", val.link);
+	                objPara.html(val.excerpt);		
+					
+	                objLi.append(objDiv);
+	                objLi.append(objAnchor);
+	                objLi.append(objPara);
+
+	                var len = $.map(val.tags, function(n, i) {
+	                    return i;
+	                }).length;
+	                var i = 1;
+	                $.each(val.tags, function(key, val) {
+	                    var objTagAnchor = $('<a href="#" class="tagTitle"></a>');
+
+	                    objTagAnchor.text(key);
+						objTagAnchor.attr("data-tag-id",val);
+	                    
+						objDivtags.append(objTagAnchor);
+	                    if (i < len) {
+	                        objDivtags.append(", ");
+	                    }
+	                    objLi.append(objDivtags);
+
+	                    i++;
+	                });
+	                objUlDummy.append(objLi);
+
+	            });
+				
+				// Increase the start and end index
+	            xResults = xResults + batchSize;
+                console.log("inside populateResults :: xresults"+ xResults);
+	            yResults = yResults + batchSize;
+				console.log("inside populateResults :: yResults"+ yResults);
+	            //highlightSearch();
+                if(json.length > batchSize){
+	            	scrollResultView(json);
+                }
+	        }
+
+
+
+			// Insert the html prepared above 
+	        if (searchOverlay.find("li[class=\"resultsItem\"]").length <= 0) {
+	            // if no resultsItem exist, after the faqContainer 
+	            searchOverlay.find(".faqContainer").after(objUlDummy.html());
+	        } else {
+				// else after the last resultsItem
+	            var ele = searchOverlay.find("li[class=\"resultsItem\"]").last();
+	            ele.after(objUlDummy.html());
+	        }
+			
+			// register click event on the tags
+			searchOverlay.find(".tagTitle").on("click", tagSearch);
+				
+	    }
+		
+		//on scroll down to show the load image 
+	    function scrollResultView(json) {
+	        /*$('.overlaySearchContainer').off("scroll");
+	        $('.overlaySearchContainer').on("scroll", function() {
+	            if ($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+                    objResultsLoadImg.find('img').show();
+                    objResultsLoadImg.find('span').hide();
+	                window.setTimeout(function() {
+						populateResults(json);
+					}, 1000);
+	                
+	            }
+	        });*/
+
+             $(".overlaySearchContainer").bind({'mousewheel DOMMouseScroll onmousewheel touchmove scroll': 
+                function(e) {
+    
+                //Determine Direction
+                    if (e.originalEvent.wheelDelta && e.originalEvent.wheelDelta >= 0) {
+                    //Up
+                        //console.log("up");
+                    
+                    } else if (e.originalEvent.detail && e.originalEvent.detail <= 0) {
+                    //Up
+                        //console.log("up");
+                    
+                    } else {
+                    //Down
+                        console.log("down");
+                        if ($(this).scrollTop() + $(this).innerHeight() >= ($(this)[0].scrollHeight-1)) {
+                            objResultsLoadImg.find('img').show();
+                            objResultsLoadImg.find('span').hide();
+                            window.setTimeout(function() {
+                                populateResults(json);
+                            }, 1000);
+                            
+                        }
+                    }
+                 }
+            });
+			
+	    }
+		
+		
+		
+	    ////// End of Showing search results 
+		
+		
+		
+	    
+	    //to find the related content in displayed result 
+	    function highlightSearch() {
+	        var ul = $(".suggestionsList");
+	        $(ul).find("li a").each(function() {
+	            applyHighlight($("#searchText").val(), $(this), "searchHighlight");
+	        });
+	        $(ul).find("li p").each(function() {
+	            applyHighlight($("#searchText").val(), $(this), "searchHighlight");
+	        });
+	    }
+		
+		
+	    //to highlight the related content in displayed result 
+	    function applyHighlight(word, element, className) {
+	        var regex = new RegExp(word, "i");
+	        var pageText = element.text().replace("<span>", "").replace("</span>");
+	        var searchedText = word;
+	        var theRegEx = new RegExp("(" + searchedText + ")", "igm");
+	        newHtml = pageText.replace(theRegEx, '<span class="' + className + '">$1</span>');
+	        if (element.text().search(regex) < 0) {
+	            //do nothing
+	        } else {
+	            element.html(newHtml);
+	        }
+	    }
+
+		
+	    function closeOverlaySearch() {
+	        searchOverlay.hide();
+	        $("body").removeClass("modal-open");
+	    }
+
+	    function init() {
+
+	        // Open search overlay
+	        $('.input-group .overlaySearchInput').on('click', showOverlaySearch);
+
+	        // Close search overlay
+	        $("#searchClose").click(closeOverlaySearch);
+
+	        // Show suggestions on keyup
+	        $("#searchText").on("keyup", keyUpHandler);
+
+	        // Show results on search btn
+	        searchOverlay.find(".search-btn").click(showResults);
+	    }
+	    
+		init();
+
+	});
