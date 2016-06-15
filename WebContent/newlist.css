@@ -1,0 +1,84 @@
+.metadata{
+padding-top:1px;
+padding-left:10px
+}
+
+
+.image{
+ position: absolute;
+    top: 20px;
+    right: 40px;
+	}
+	#details
+	{
+	position:relative;
+	   padding: 15px 0;
+    border-top: 1px solid #eaeaea;
+    border-bottom: 1px solid #eaeaea;
+	
+	}
+	div{
+	padding-bottom:4px;}
+	
+	
+	
+ul li{
+
+padding-right:30px;
+
+}
+.title a{
+color:#0079d6;
+padding-left:4px;
+}
+a:hover {
+   color:blue;
+}
+#details:hover{
+   background-color:white;
+}
+.bt{
+ position: absolute;
+    top: 90px;
+    right: 100px;
+}
+
+ul#menu {
+    padding: 0;
+}
+
+ul#menu li {
+    display: inline-block;
+}
+
+ul#menu li a {
+   
+    color: black;
+    padding: 10px 90px;
+    text-decoration: none;
+    border-radius: 4px 4px 0 0;
+}
+#saveForm{
+
+position:absolute;
+top: 60px;
+right: 30px;
+height:30px;
+width:30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+   
