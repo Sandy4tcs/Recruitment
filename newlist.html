@@ -13,7 +13,10 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-	
+	<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	 <link href="css/newlist.css" rel="stylesheet">
      
 
 	</head>
@@ -22,31 +25,137 @@
 	<div class="container-fluid">
 	<div class="row" style="margin-top:40px;">
 	<div class="col-lg-3">
-	</div>
-	<div class="col-lg-6">
+	  <div class="panel panel-default">
+	  <div class="panel-body">
+	      <h4>Location</h4>
+                                     <select class="list-group-item" name="miles" id="miles"> 
+                                     <option selected disabled>Select Miles</option>
+                                     <option value="3">3 Miles</option>
+                                     <option value="5">5 Miles</option>
+                                     <option value="10">10 Miles</option>
+                                     <option value="20">20 Miles</option>
+                                     <option value="30">30 Miles</option>
+                                     <option value="50">50 Miles</option>
+                                     
+                                     </select>
 	
-       <div class="details" id="details">
+	</div>
+	</div>
+		  <div class="panel panel-default">
+	  <div class="panel-body">
+	      <h4>Salary</h4>
+                                     <select class="list-group-item" name="miles" id="miles"> 
+                                     <option selected disabled>Salary</option>
+                                     <option value="3">3000</option>
+                                     <option value="5">5000</option>
+                                     <option value="10">10000</option>
+                                     <option value="20">20000</option>
+                                     <option value="30">30000</option>
+                                     <option value="50">50000</option>
+                                     
+                                     </select>
+	
+	</div>
+	</div>
+	 <div class="panel panel-default">
+	  <div class="panel-body">
+	      <h4>Specialisms</h4>
+		         <input type="checkbox" name="Permanent" value="Permanent"> Java Developer<br>
+  <input type="checkbox" name="Temporary" value="Temporary" > Customer Service<br>
+   <input type="checkbox" name="Full Time" value="Full Time" > Human Resources<br>
+    <input type="checkbox" name="Part Time" value="Part Time" > Front End Developer <br>
+	  <input type="checkbox" name="Full Time" value="Full Time" > Legal<br>
+    <input type="checkbox" name="Part Time" value="Part Time" > General Insuarance <br>
+	
+   
+	
+	</div>
+	</div>
+		  <div class="panel panel-default">
+	  <div class="panel-body">
+	      <h4>Job Type</h4>
+                                    <input type="checkbox" name="Permanent" value="Permanent"> Permanent<br>
+  <input type="checkbox" name="Temporary" value="Temporary" > Temporary<br>
+   <input type="checkbox" name="Full Time" value="Full Time" > Full Time<br>
+    <input type="checkbox" name="Part Time" value="Part Time" > Part Time
+	
+	</div>
+	</div>
+	</div>
+	<div class="col-lg-6 ">
+<div class="article">
+	
+       <div id="details">
                 
             <header>
-			<h3 class="title">
-			<a href="/Recruitment/candidatedetailsnew1.html?key=2&amp;passkey=39">JENETTE CALDWELL</a>
-			</h3>
-			<div class="posted-by" id="postdate">Posted 32 days ago</div>
+			<h4 class="title">
+			<a href="/Recruitment/candidatedetailsnew1.html?key=2&amp;passkey=39" id="name">JENETTE CALDWELL</a>
+			</h4>
+			
 			</header>
-			<div class="metadata"><ul>
-			<li>ID : &nbsp; &nbsp;2</li>
-			<li>E-Mail : &nbsp; &nbsp;jene.caldwell@gmail.com</li>
-			</ul>
-			<ul>
-			<li>From : &nbsp; &nbsp;LONDON</li>
-			<li>PhoneNO : &nbsp; &nbsp;8274802945</li>
-			</ul>
-			<ul>
+			<div class="metadata">
+			
+			<ul class="fa-ul">
+			
+			<li> <i class="fa fa-map-marker fa-lg"></i>&nbsp;&nbsp;LONDON</li>
+			<li><i class="fa fa-envelope"></i>&nbsp;&nbsp;jene.caldwell@gmail.com</li>
+			<li><i class="fa fa-mobile fa-lg"></i>&nbsp;&nbsp;&nbsp;8274802945</li>
+			<ul class="fa-ul image" >
+		
 			<li><img src="images/dice-logo-md.png" alt="DICE"></li>
-			<li>Matched : &nbsp; &nbsp;93.0%</li>
+	
+			
+			</ul>
 			</ul>
 			</div>
-</div>	     
+			
+			<div class="readmore">
+			<a href="#" onClick="$('.readmore').hide(); $('#signupbox').show()"> Read more...</a>
+			</div>
+			<div id="signupbox" style="display:none;">
+			<div class="metadata1">
+		<h4>Education</h4>
+			<ul class="fa-ul">
+			
+		
+			<li><i class="fa fa-graduation-cap"></i>&nbsp;&nbsp;B.tech</li>
+			<li><i class="fa fa-university"></i>&nbsp;&nbsp;&nbsp;oxford</li>
+			<ul class="fa-ul exp">
+			
+			<li><i class="fa fa-calendar"></i>&nbsp;&nbsp;5</li>
+			<li><i class="fa fa-book"></i>&nbsp;&nbsp;Electronics</li>
+			</ul>
+			</ul>
+			</div>
+			
+			
+			<div  class="metadata1">
+			<h4>Skills</h4>
+			<ul class="fa-ul" id="menu">
+			
+			<li><i class="fa fa-map-marker fa-lg"></i>&nbsp;&nbsp;Java</li>
+			<li><i class="fa fa-envelope"></i>&nbsp;&nbsp;HTML</li>
+			<li><i class="fa fa-mobile fa-lg"></i>&nbsp;&nbsp;&nbsp;Bootstrap</li>
+			</ul>
+			</div>
+			<div class="metadata1">
+			<h4>Personal Details</h4>
+			<ul class="fa-ul" id="menu">
+			
+			<li><i class="fa fa-map-marker fa-lg"></i> &nbsp;&nbsp;Driving Licence:&nbsp;&nbsp;yes</li>
+			<li><i class="fa fa-car"></i>&nbsp;&nbsp;Carowner:&nbsp;&nbsp;yes</li>
+		
+			</ul>
+			</div>
+			
+			
+			
+			</div>
+			
+			
+</div>	  
+
+</div>   
 
 
 

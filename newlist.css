@@ -92,6 +92,20 @@ position:absolute;
 top: 180px;
 right: 160px;
 }
+---------------------------------------------------------------------------------------------------
+.panel-body {
+background-color:white;
+
+
+}
+.panel-body h4{
+color: #007acc;
+}
+.list-group-item{
+border:1px solid black;
+}
+
+
 
 
 
