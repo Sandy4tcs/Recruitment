@@ -1,0 +1,39 @@
+
+
+#signin{
+	padding-top:30px;
+	font-size:85%
+}
+#header{
+	background-color:black;
+	color:white;
+}
+.bg-4{
+	background-color:#2f2f2f;
+	color:white;
+}
+
+
+.col-md-3 .control-label{
+float:left;
+}
+
+  .panel-heading {
+      color: #fff !important;
+      background-color: black !important;
+	   border-color:black;
+  
+  }
+  
+ 
+ .panel {
+      border: 1px solid black; 
+	  }
+	.btn1 {
+    color: #fff;
+    background-color: black;
+    border-color: black;}
+	
+	
+	.search a{
+	color:black;}

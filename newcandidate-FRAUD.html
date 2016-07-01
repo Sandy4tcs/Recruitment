@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+		
+	  <link rel="stylesheet" href="css/loginstyle.css">
+	 
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/base/jquery-ui.css">
+
+    <title>New candidate Registration</title>
+	
+	<script type="text/javascript">
+$(function() {
+    $('.date-picker').datepicker( {
+        changeMonth: true,
+        changeYear: true,
+        showButtonPanel: true,
+        dateFormat: 'MM yy',
+        onClose: function(dateText, inst) { 
+            $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+        }
+    });
+});
+</script>
+	</head>
+	<body>
+		   <div id="signupbox" style="margin-top:40px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                    <div class="panel panel-default text-center" style="border-color:black">
+                        <div class="panel-heading">
+                            <div class="panel-title">NEW CANDIDATE REGISTRATION</div>
+                            
+                        </div>  
+                        <div class="panel-body" >
+					
+                            <form id="signupform" style="padding-top:40px;" class="form-horizontal" role="form">
+                                
+                                <div id="signupalert" style="display:none" class="alert alert-danger">
+                                    <p>Error:</p>
+                                    <span></span>
+                                </div>
+                                    
+                                
+                                  
+                                <div class="form-group">
+                                    <label for="Title" class="col-md-3 control-label">Title</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" name="Title" required>
+                                    </div>
+                                </div>
+                                    
+                                <div class="form-group">
+                                    <label for="firstname" class="col-md-3 control-label">First Name</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" name="firstname">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastname" class="col-md-3 control-label">Last Name</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" name="lastname" >
+                                    </div>
+                                </div>
+								 <div class="form-group">
+                                    <label for="Email" class="col-md-3 control-label">Email</label>
+                                    <div class="col-md-6">
+                                        <input type="email" class="form-control" name="Email" required>
+                                    </div>
+                                </div>
+								 <div class="form-group">
+                                    <label for="Email1" class="col-md-3 control-label">Confirm Email Address</label>
+                                    <div class="col-md-6">
+                                        <input type="email" class="form-control" name="Email1" required>
+                                    </div>
+                                </div>
+								
+								
+                                <div class="form-group">
+                                    <label for="password" class="col-md-3 control-label">DOB</label>
+                                    <div class="col-md-6">
+                                        <input type="date"  class="form-control" name="day">
+                                    </div>
+                                </div>
+								
+                                    
+                                <div class="form-group">
+                                    <label for="icode" class="col-md-3 control-label">Reported By</label>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" name="icode" placeholder="">
+                                    </div>
+                                </div>
+								<div class="form-group">
+                                    <label for="password" class="col-md-3 control-label">Current Address</label>
+                                    <div class="col-md-6">
+                                        <input type="text"  class="form-control" name="address">
+                                    </div>
+									
+                                </div>
+								<div class="form-group">
+                                    <label for="password" class="col-md-3 control-label"></label>
+                                    <div class="col-md-6">
+                                        <input type="text"  class="form-control" name="address">
+                                    </div>
+									
+                                </div>
+									<div class="form-group">
+                                    <label for="password" class="col-md-3 control-label"></label>
+                                    <div class="col-md-6">
+                                        <input type="text"  class="form-control" name="address">
+                                    </div>
+									
+                                </div>
+									<div class="form-group">
+                                    <label for="password" class="col-md-3 control-label">Resident Since</label>
+                                    <div class="col-md-6">
+                                        <input name="startDate" id="startDate" class="date-picker form-control">
+                                    </div>
+									
+                                </div>
+
+                                <div class="form-group">
+                                                                         
+                                    <div class="col-md-offset-3 col-md-6">
+                                        <button id="btn-signup" type="button" class="btn btn1">Submit</button> 
+                                    </div>
+                                </div>
+                                                                
+                            </form>
+                         </div>
+                    </div>
+
+               
+               
+                
+         </div> 
+		 </body>
+		 </html>
